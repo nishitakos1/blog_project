@@ -1,0 +1,39 @@
+{% extends "base.html" %} {% block tab_content %} {{object.title}} {% endblock %} {% block page_content %}
+<div class="container">
+    <div class="row">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <!-- Title -->
+            <h1 class="mt-4">{{object.title}}</h1>
+            <h3 class="mt-4">{{object.subtitle}}</h1>
+                <hr>
+                <!-- Date/Time -->
+                <p>Published on: {{object.created_at}}</p>
+                <hr>
+                <!-- Post Content -->
+                <p class="lead">{{object.body}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-6">
+        <div class="row no-gutters border rounded overflow-hidden flex-md-row my-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+
+                <h3 class="mb-0">Post</h3>
+                <div class="mb-1 text-muted">Nov 11</div>
+                <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="blog-post">
+    <h2 class="blog-post-title">Sample blog post</h2>
+    <p class="blog-post-meta">January 1, 2014 by </p>
+
+    <p>This blog post shows a few different types of content that’s supported and styled with Bootstrap. Basic typography, images, and code are all supported.</p>
+    <hr>
+</div> {% endblock %}
