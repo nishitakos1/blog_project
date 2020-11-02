@@ -2,11 +2,25 @@ from django.db import models
 
 
 # Create your models here.
-class BlogPost(models.Model):
-    # id - Django automatically creates an auto-incrementing primary key for every model!
-    title = models.CharField(max_length=120, null=True, blank=False)
-    subtitle = models.CharField(max_length=180, null=True, blank=False)
-    slug = models.SlugField(unique=True, null=True, blank=False)
-    body = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True, null=False)
-    updated_at = models.DateTimeField(auto_now=True, null=False)
+
+class Contact(models.Model):
+    sno = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=13)
+    email = models.CharField(max_length=100)
+    content = models.TextField()
+    timeStamp = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return 'Message From ' + self.name + '-' + self.email
+    
+class Post(models.Model):
+    sno = models.AutoField(primary_key=True)
+    title = models.CharField(max_length=255)
+    author = models.CharField(max_length=100)
+    content = models.TextField()
+    timeStamp = models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return self.title + ' by ' + self.author
+    

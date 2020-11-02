@@ -1,19 +1,37 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from .models import BlogPost
-from django.shortcuts import render, get_object_or_404
+from .models import Contact, Post
+from django.contrib import messages
+
 
 # Create your views here.
 
 
 def home_view(request):
-    qs = BlogPost.objects.all()
-    template_name = 'home.html'
-    context = {'object_list': qs}
-    return render(request, template_name, context)
+    return render(request, 'home.html')
 
-def read_article(request, slug):
-    obj = get_object_or_404(BlogPost, slug= slug)
-    template_name = 'read_article.html'
-    context = {'object': obj}
-    return render(request, template_name, context)
+def contact(request):
+    if request.method=='POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        phone = request.POST['phone']
+        content = request.POST['content']
+        print(name, email, phone, content) 
+        if len(name)<2 or len(email)<4 or len(phone)<10 or len(content)<4 :
+            messages.error(request, "Please fill the form correctly")
+        else:
+            contact = Contact(name=name, email=email, phone=phone, content=content)
+            contact.save()
+            messages.success(request, "You have successfully submitted your issue !")
+    return render(request,'contact.html')
+
+def blog(request):
+    return render(request,'blog.html')
+
+def post(request):
+    allPosts = Post.objects.all()
+    print(allPosts)
+    context = {'allPosts' : allPosts}
+
+    return render(request, 'post.html', context)
+
